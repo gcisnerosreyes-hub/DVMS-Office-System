@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DVMS Office – Live Student Display</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+  <h1>📋 Students Currently in the Office</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Grade</th>
+        <th>Reason</th>
+        <th>Time Waiting</th>
+      </tr>
+    </thead>
+    <tbody id="studentList">
+      <!-- Students will appear here -->
+    </tbody>
+  </table>
+
+  <script src="../firebase.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
 
