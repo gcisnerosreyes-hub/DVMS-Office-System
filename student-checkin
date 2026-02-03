@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  < title>Diamond Valley MS – Student Check-In</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      width: 350px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #1f4e79;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #1f4e79;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #163a59;
+    }
+
+    .success {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Office Check-In</h1>
+
+    <label>Student Name</label>
+    <input type="text" id="name" placeholder="First & Last Name" />
+
+    <label>Grade</label>
+    <select id="grade">
+      <option value="">Select Grade</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+    </select>
+
+    <label>Reason for Visit</label>
+    <select id="reason">
+      <option value="">Select Reason</option>
+      <option>Write a Statement</option>
+      <option>See Principal – Mr. Taylor</option>
+      <option>Assistant Principal – Ms. Espinoza</option>
+      <option>Ms. Deatherage</option>
+      <option>Nurse</option>
+      <option>Parent Liaison</option>
+      <option>Attendance</option>
+      <option>Counselor – Mr. Scott</option>
+      <option>Counselor – Mr. Boenzi</option>
+    </select>
+
+    <button onclick="checkInStudent()">Check In</button>
+
+    <div class="success" id="message"></div>
+  </div>
+
+  <script>
+    function checkInStudent() {
+      const name = document.getElementById("name").value;
+      const grade = document.getElementById("grade").value;
+      const reason = document.getElementById("reason").value;
+
+      if (!name || !grade || !reason) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      const studentData = {
+        name: name,
+        grade: grade,
+        reason: reason,
+        time: new Date().toLocaleTimeString(),
+        timestamp: Date.now(),
+        status: "Waiting",
+        date: new Date().toLocaleDateString()
+      };
+
+      console.log("Student Checked In:", studentData);
+
+      document.getElementById("message").textContent =
+        "You are checked in. Please wait.";
+
+      document.getElementById("name").value = "";
+      document.getElementById("grade").value = "";
+      document.getElementById("reason").value = "";
+    }
+  </script>
+</body>
+</html>
 
