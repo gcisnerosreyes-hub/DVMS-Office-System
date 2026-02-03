@@ -10,4 +10,9 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+// Test Firebase connection
+database.ref("test").set({
+  connected: true
+});
+
 
