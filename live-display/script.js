@@ -1,34 +1,41 @@
-const studentList = document.getElementById("studentList");
+// Daily reset (clears students each day)
+const today = new Date().toDateString();
+const lastDay = localStorage.getItem("lastDay");
 
-// Load students from localStorage
-let students = JSON.parse(localStorage.getItem("students")) || [];
-
-function renderStudents() {
-  studentList.innerHTML = "";
-
-  const now = Date.now();
-
-  students.forEach(student => {
-    // Calculate minutes waiting
-    const minutes = Math.floor((now - student.checkInTime) / 60000);
-
-    let color = "green";
-    if (minutes > 20) color = "red";
-    else if (minutes > 10) color = "yellow";
-
-    const tr = document.createElement("tr");
-    tr.style.backgroundColor = color;
-
-    tr.innerHTML = `
-      <td>${student.name}</td>
-      <td>${student.grade}</td>
-      <td>${student.reason}</td>
-      <td>${minutes} min</td>
-    `;
-    studentList.appendChild(tr);
-  });
+if (lastDay !== today) {
+  localStorage.removeItem("students");
+  localStorage.setItem("lastDay", today);
 }
 
-// Refresh every 10 seconds
-setInterval(renderStudents, 10000);
-renderStudents();
+// Load existing students
+let students = JSON.parse(localStorage.getItem("students")) || [];
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const grade = document.getElementById("grade").value;
+  const reason = document.getElementById("reason").value;
+
+  if (!name) {
+    alert("Please enter your name");
+    return;
+  }
+
+  const student = {
+    id: Date.now(),
+    name,
+    grade,
+    reason,
+    checkInTime: Date.now(),
+    status: "waiting"
+  };
+
+  students.push(student);
+  localStorage.setItem("students", JSON.stringify(students));
+
+  form.reset();
+  alert("✅ You are checked in!");
+});
